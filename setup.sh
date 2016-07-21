@@ -16,12 +16,12 @@ echo "[provisioner] stopping neo4j..."
 neo4j stop
 
 echo "NEO4J_ULIMIT_NOFILE=50000" >> neo4j
-sudo cp neo4j /etc/default/
+sudo mv neo4j /etc/default/
 sudo chown neo4j /etc/default/neo4j
 
 echo "[provisioner] updating config..."
 sed -i 's/#dbms\.connector\.http\.address=0\.0\.0\.0/dbms.connector.http.address=0.0.0.0/' /etc/neo4j/neo4j.conf
-sed -i 's/#dbms\.connector\.bolt\.address=0\.0\.0\.0/dbms.connector.bolt.address=0.0.0.0/' /etc/neo4j/neo4j.conf
+sed -i 's/# dbms\.connector\.bolt\.address=0\.0\.0\.0/dbms.connector.bolt.address=0.0.0.0/' /etc/neo4j/neo4j.conf
 echo "[provisioner] bolt and http endpoints opened!"
 echo "[provisioner] starting neo4j..."
 sudo service neo4j start
